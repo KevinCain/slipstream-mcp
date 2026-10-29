@@ -1,0 +1,15 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "rentals.slipstream/slipstream",
+  "title": "Slipstream: short term rental analytics",
+  "description": "Read-only analytics for short-term rentals: bookings, occupancy, forecasts, reviews, owner payouts.",
+  "version": "1.0.0",
+  "websiteUrl": "https://slipstream.rentals/integrations/claude?ref=registry",
+  "icons": [
+    { "src": "https://slipstream.rentals/icon-192.png", "mimeType": "image/png", "sizes": ["192x192"] },
+    { "src": "https://slipstream.rentals/icon-512.png", "mimeType": "image/png", "sizes": ["512x512"] }
+  ],
+  "remotes": [
+    { "type": "streamable-http", "url": "https://slipstream.rentals/api/ask/mcp" }
+  ]
+}
