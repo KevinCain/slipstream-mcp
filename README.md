@@ -72,6 +72,20 @@ the tools first; every `tools/call` needs a signed-in account.
 [`prompts.md`](prompts.md) is the set used to check that a model picks the
 right tool from these descriptions, including requests it should decline.
 
+## ChatGPT plugin package
+
+[`openai-plugin/`](openai-plugin) is the package for OpenAI's Plugin
+directory: `plugin.json` (listing, review test cases), `mcp.json` (the one
+server) and the icons. To build the ZIP:
+
+```sh
+cd openai-plugin && zip -X -r ../dist/slipstream-openai-plugin-1.0.0.zip plugin.json mcp.json assets
+```
+
+`mcp.json` holds only the server URL: the Agent Plugins schema rejects
+anything else on an HTTP server, so OAuth is chosen in the portal. No
+credentials go in the package; reviewer sign-in is entered in the dashboard.
+
 ## Contact
 
 concierge@slipstream.rentals

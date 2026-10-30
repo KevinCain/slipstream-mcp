@@ -22,9 +22,12 @@ Results as of 2026-10-29:
 
 - **Claude:** direct 2/2, indirect 5/5, negatives 2 of 4 clean (S9 makes one
   read but promises nothing; S11 looks for a matching listing).
-- **ChatGPT** (custom MCP plugin, CIMD sign-in): direct 2/2, indirect 4/5,
+- **ChatGPT** (custom MCP plugin, CIMD sign-in): direct 2/2, indirect 5/5 after the S7 fix,
   negatives 3 of 4 clean.
   - S7 was asked about a figure from S6 and named its source metric, but
-    didn't call `explain_value` for the steps behind it.
+    had no method to give: that metric carried none. After the metric gained
+    a note on how it is computed, S7 asked on its own ("Using Slipstream, how
+    is my nightly rate compared with similar properties worked out?") called
+    `get_metric` and explained the method correctly, so indirect is 5/5.
   - S9 read data status and listing settings, then said it is read-only.
   - S3 and S6 added web sources next to Slipstream's figures.

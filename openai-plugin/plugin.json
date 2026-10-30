@@ -1,0 +1,92 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "slipstream",
+  "version": "1.0.0",
+  "description": "Read-only analytics for short-term rentals: bookings, occupancy, forecasts, reviews and owner payouts from Hospitable, OwnerRez or an Airbnb listing.",
+  "author": {
+    "name": "Slipstream",
+    "url": "https://slipstream.rentals"
+  },
+  "homepage": "https://slipstream.rentals",
+  "repository": "https://github.com/KevinCain/slipstream-mcp",
+  "keywords": ["short-term rentals", "vacation rentals", "airbnb", "hospitable", "ownerrez", "analytics"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Slipstream",
+        "shortDescription": "Short-term rental analytics",
+        "longDescription": "Slipstream connects ChatGPT to a short-term rental host's Slipstream account, so you can ask about your rentals in plain words. It reads bookings, occupancy, open nights, forecasts, income goals, guest reviews and owner payouts, synced from Hospitable, OwnerRez or your own Airbnb listing through Hospitable Connect.\n\nEvery figure comes with a link back to the Slipstream page it came from, and Slipstream can show the steps behind a number.\n\nIt is read-only. It can't change a listing, a price or a setting, and it can't send messages. Guest names, emails and phone numbers are never sent to ChatGPT. Settings → Connected AI apps in Slipstream lists each connection, when it was last used and what it read, and disconnecting there refuses its next request.\n\nNeeds a Slipstream account (trial or paid) on a co-host or manager login.",
+        "developerName": "Slipstream",
+        "category": "Productivity",
+        "capabilities": ["Read"],
+        "websiteURL": "https://slipstream.rentals/?ref=chatgpt",
+        "supportURL": "https://slipstream.rentals/integrations/claude?ref=chatgpt",
+        "privacyPolicyURL": "https://slipstream.rentals/privacy",
+        "termsOfServiceURL": "https://slipstream.rentals/terms",
+        "defaultPrompt": [
+          "Ask Slipstream how my occupancy looks next month",
+          "Using Slipstream, which owner earned most last month?",
+          "Which open nights next month should I worry about?"
+        ],
+        "brandColor": "#F5A524",
+        "brandColorDark": "#F5A524",
+        "composerIcon": "./assets/composer-icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Occupancy for a named month",
+              "prompt": "Ask Slipstream how my occupancy looks for November",
+              "tools_triggered": "get_occupancy",
+              "expected_behavior": "Calls get_occupancy for November and reports the occupancy rate and booked nights, quoting Slipstream's figures with their links."
+            },
+            {
+              "description": "Owner payouts for a past month",
+              "prompt": "Using Slipstream, which owner earned most in September?",
+              "tools_triggered": "get_owner_payouts",
+              "expected_behavior": "Calls get_owner_payouts for September and names the property whose owner earned most, with the amount and number of stays, plus a per-property breakdown."
+            },
+            {
+              "description": "Upcoming gaps in the calendar",
+              "prompt": "Which open nights next month should I worry about?",
+              "tools_triggered": "get_open_nights",
+              "expected_behavior": "Calls get_open_nights and lists the open nights or gaps next month that matter most, by property, without changing anything."
+            },
+            {
+              "description": "Pricing advice without changing anything",
+              "prompt": "Should I drop my price for Thanksgiving week?",
+              "tools_triggered": "get_occupancy, get_forecast, get_listing_settings",
+              "expected_behavior": "Reads occupancy, forecast and listing settings for the week, then gives advice. It does not claim to change any price, since Slipstream is read-only."
+            },
+            {
+              "description": "Explaining where a figure comes from",
+              "prompt": "Using Slipstream, how is my nightly rate compared with similar properties worked out?",
+              "tools_triggered": "get_metric",
+              "expected_behavior": "Calls get_metric for the nightly rate vs comparable properties and explains the method from the tool's note: average nightly rate on confirmed stays minus the size-adjusted median rate of comparable properties, shown only with 2 or more comparables."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Guest messaging is out of scope",
+              "prompt": "Reply to the guest asking about early check-in"
+            },
+            {
+              "description": "Travel search is out of scope",
+              "prompt": "Find me an Airbnb in Lisbon for May"
+            },
+            {
+              "description": "Generic copywriting needs no account data",
+              "prompt": "Write a listing description for a 2-bed beach condo"
+            }
+          ]
+        },
+        "commerce": false
+      },
+      "publication": {
+        "release_notes": "First release: read-only tools for bookings, occupancy, open nights, forecasts, goals, reviews, owner payouts and statement checks."
+      }
+    }
+  }
+}
