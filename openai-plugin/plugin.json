@@ -17,10 +17,10 @@
         "shortDescription": "Short-term rental analytics",
         "longDescription": "Slipstream connects ChatGPT to a short-term rental host's Slipstream account, so you can ask about your rentals in plain words. It reads bookings, occupancy, open nights, forecasts, income goals, guest reviews and owner payouts, synced from Hospitable, OwnerRez or your own Airbnb listing through Hospitable Connect.\n\nEvery figure comes with a link back to the Slipstream page it came from, and Slipstream can show the steps behind a number.\n\nIt is read-only. It can't change a listing, a price or a setting, and it can't send messages. Guest names, emails and phone numbers are never sent to ChatGPT. Settings → Connected AI apps in Slipstream lists each connection, when it was last used and what it read, and disconnecting there refuses its next request.\n\nNeeds a Slipstream account (trial or paid) on a co-host or manager login.",
         "developerName": "Slipstream",
-        "category": "Productivity",
+        "category": "Data & Analytics",
         "capabilities": ["Read"],
         "websiteURL": "https://slipstream.rentals/?ref=chatgpt",
-        "supportURL": "https://slipstream.rentals/integrations/claude?ref=chatgpt",
+        "supportURL": "https://slipstream.rentals/support",
         "privacyPolicyURL": "https://slipstream.rentals/privacy",
         "termsOfServiceURL": "https://slipstream.rentals/terms",
         "defaultPrompt": [
