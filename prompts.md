@@ -1,6 +1,6 @@
 # Test prompts
 
-Each prompt was run in Claude with only the Slipstream connector relevant.
+Each prompt was run in Claude, and later in ChatGPT, with only the Slipstream connector relevant.
 "Direct" names Slipstream; "indirect" doesn't; "negative" must not lead to a
 Slipstream call that pretends to help.
 
@@ -18,5 +18,13 @@ Slipstream call that pretends to help.
 | S10 | Negative | Find me an Airbnb in Lisbon for May | no Slipstream call |
 | S11 | Negative | Write a listing description for a 2-bed beach condo | no Slipstream call (reading the host's own listing is borderline) |
 
-Results as of 2026-10-29: direct 2/2, indirect 5/5, negatives 2 of 4 clean
-(S9 makes one read but promises nothing; S11 looks for a matching listing).
+Results as of 2026-10-29:
+
+- **Claude:** direct 2/2, indirect 5/5, negatives 2 of 4 clean (S9 makes one
+  read but promises nothing; S11 looks for a matching listing).
+- **ChatGPT** (custom MCP plugin, CIMD sign-in): direct 2/2, indirect 4/5,
+  negatives 3 of 4 clean.
+  - S7 was asked about a figure from S6 and named its source metric, but
+    didn't call `explain_value` for the steps behind it.
+  - S9 read data status and listing settings, then said it is read-only.
+  - S3 and S6 added web sources next to Slipstream's figures.
